@@ -54,7 +54,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Espacement entre les tâches */
+    gap: 10px;
 }
 
 .task-item {
@@ -66,4 +66,26 @@
     background-color: rgb(208, 228, 247);
     color: rgba(24, 50, 90, 0.87);
     font-weight: 500;
+}
+
+.btn-reset {
+    margin-top: 30px;
+    width: 100%;
+    max-width: 400px;
+    display: block;
+    padding: 12px 20px;
+    border-radius: 25px;
+    border-color: 0;
+    border: 0;
+    background-color: rgba(24, 50, 90, 0.87); 
+    color: aliceblue;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-reset:hover {
+    background-color: rgba(40, 71, 118, 0.87);
 }

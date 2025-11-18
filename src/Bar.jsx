@@ -30,6 +30,10 @@ function Bar() {
         addTask();
     };
 
+    const handleReset = useCallback(() => {
+        setTasks([]);
+    })
+
     return (
         <>
             {/* 2. ENVELOPPER DANS UN FORMULAIRE et utiliser onSubmit */}
@@ -64,6 +68,10 @@ function Bar() {
                     </div>
                 ))}
             </div>
+
+            <button className="btn-reset" onClick={handleReset}>
+                Reset les tâches
+            </button>
         </>
     );
 }
