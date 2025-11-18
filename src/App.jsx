@@ -16,6 +16,7 @@ function App() {
   return (
     <div className={`container ${isHovering ? "container-light" : ""}`} onMouseEnter={handleHovering} onMouseLeave={handleLeaving}>
       <h1>To Do List</h1>
+      <p>Ecrivez vos pensées</p>
       <Bar />
     </div>
   )

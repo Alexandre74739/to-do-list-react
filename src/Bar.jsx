@@ -4,10 +4,15 @@ import './Bar.css';
 
 function Bar() {
     const [count, setCount] = useState(0);
+    const [content, setContent] = useState("");
+    const [task, setTask] = ([]);
 
-    const handleSubmit = useCallback(() => {
-        setCount(count + 1);
-    })
+
+    const handleContentChange = useCallback((e) => {
+        setContent(content = e.target.value);
+    }, []);
+
+    
 
     return (
         <>
@@ -18,7 +23,7 @@ function Bar() {
                     placeholder="Votre tâche..."
                 />
                 <button
-                    onClick={handleSubmit}
+                    onClick={handleContentChange}
                     className="btn-inside">
                     ADD
                 </button>
