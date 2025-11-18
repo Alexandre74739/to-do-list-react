@@ -1,25 +1,16 @@
 import { useCallback, useState } from "react";
 import './Bar.css';
-// Note: useMemo n'est pas nécessaire ici
 
 function Bar() {
-    // 1. CORRECTION: Initialisation des états
     const [content, setContent] = useState("");
-    // CORRECTION: Utiliser useState pour initialiser le tableau des tâches
     const [tasks, setTasks] = useState([]); 
-    // const [count, setCount] = useState(0); // Non utilisé, peut être retiré
 
-    // 2. Fonction de gestion du changement de l'input
     const handleContentChange = useCallback((e) => {
-        console.log('e', e);
-        
-        // CORRECTION: Mettre à jour l'état avec la nouvelle valeur
         setContent(e.target.value); 
     }, []);
 
-    // 3. Fonction pour ajouter une tâche au tableau (déclenchée par le bouton ADD)
     const addTask = useCallback(() => {
-        if (content.trim() === "") return; // Empêche l'ajout de tâches vides
+        if (content.trim() === "") return; 
         
         const newTask = {
             id: Date.now(),
@@ -27,38 +18,49 @@ function Bar() {
             completed: false
         };
 
-        // Ajout immuable de la nouvelle tâche au tableau
-        setTasks([...tasks, newTask]);
-        
-        // Réinitialisation de l'input
+        // Utilisation de la forme fonctionnelle pour la mise à jour
+        setTasks(prevTasks => [...prevTasks, newTask]);
         setContent(""); 
 
-    }, [content, tasks]); // Dépendance à 'content' pour lire sa valeur
+    }, [content]); // Dépendance à 'content'
+
+    // 1. NOUVEAU: Fonction pour gérer la soumission du formulaire (Entrée ou clic)
+    const handleSubmit = (e) => {
+        e.preventDefault(); // Empêche le rechargement de la page par défaut du formulaire
+        addTask();
+    };
 
     return (
         <>
-            <div className="input-group-wrapper">
-                <input
-                    type="text"
-                    className="input-task"
-                    placeholder="Votre tâche..."
-                    // LIAISON: Lier l'input à l'état 'content'
-                    value={content} 
-                    onChange={handleContentChange}
-                />
-                <button
-                    // ACTION: Déclencher l'ajout de la tâche
-                    onClick={addTask}
-                    className="btn-inside">
-                    ADD
-                </button>
-            </div>
+            {/* 2. ENVELOPPER DANS UN FORMULAIRE et utiliser onSubmit */}
+            <form onSubmit={handleSubmit}>
+                <div className="input-group-wrapper">
+                    <input
+                        type="text"
+                        className="input-task"
+                        placeholder="Votre tâche..."
+                        value={content} 
+                        onChange={handleContentChange}
+                    />
+                    <button
+                        // Le clic du bouton ADD déclenchera le handleSubmit via le type="submit" implicite
+                        className="btn-inside"
+                        type="submit" // S'assurer que le bouton soumet le formulaire
+                    >
+                        ADD
+                    </button>
+                </div>
+            </form>
             
-            {/* 4. RENDU: Afficher les nouvelles div (tâches) */}
-            <div className="task-container">
+            <div className="task-list-wrapper">
                 {tasks.map((task) => (
-                    <div key={task.id} className="task-container">
-                        {task.text} - {task.completed ? "done" : "todo"}
+                    <div key={task.id} className="task-item">
+                        <span className="task-text">
+                            {task.text}
+                        </span>
+                        <span className="task-status">
+                            {task.completed ? ' (Terminé)' : ''}
+                        </span>
                     </div>
                 ))}
             </div>

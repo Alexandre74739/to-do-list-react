@@ -48,10 +48,22 @@
     cursor: pointer;
 }
 
-.task-container {
+.task-list-wrapper { 
     margin-top: 20px;
-    color: rgba(24, 50, 90, 0.87);
-    text-align: start;
-    background-color: aliceblue;
+    max-width: 400px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Espacement entre les tâches */
+}
+
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px; 
     border-radius: 25px;
+    background-color: rgb(208, 228, 247);
+    color: rgba(24, 50, 90, 0.87);
+    font-weight: 500;
 }
