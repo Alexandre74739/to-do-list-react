@@ -11,13 +11,18 @@ function Bar() {
 
     return (
         <>
-
-            <input
-                type="text"
-                className="input-task"
-                placeholder="Votre tâche..." />
-            <button
-                onClick={handleSubmit}></button>
+            <div className="input-group-wrapper">
+                <input
+                    type="text"
+                    className="input-task"
+                    placeholder="Votre tâche..."
+                />
+                <button
+                    onClick={handleSubmit}
+                    className="add-btn-inside">
+                    ADD
+                </button>
+            </div>
         </>
     )
 }

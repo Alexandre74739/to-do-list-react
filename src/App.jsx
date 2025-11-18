@@ -1,15 +1,23 @@
+import { useState, useCallback } from 'react';
 import './App.css'
 import Bar from './Bar'
 
 function App() {
+  const [isHovering, setIsHovering] = useState(false);
+
+  const handleHovering = useCallback(() => {
+    setIsHovering(true);
+  }, []); 
+
+  const handleLeaving = useCallback(() => {
+    setIsHovering(false);
+  }, []);
 
   return (
-    <>
+    <div className={`container ${isHovering ? "container-light" : ""}`} onMouseEnter={handleHovering} onMouseLeave={handleLeaving}>
       <h1>To Do List</h1>
-      <h2>Améliorer votre gestion du temps</h2>
-
       <Bar />
-    </>
+    </div>
   )
 }
 
