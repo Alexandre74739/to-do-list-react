@@ -19,7 +19,7 @@ function Bar() {
                 />
                 <button
                     onClick={handleSubmit}
-                    className="add-btn-inside">
+                    className="btn-inside">
                     ADD
                 </button>
             </div>
